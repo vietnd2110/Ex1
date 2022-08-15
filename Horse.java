@@ -30,8 +30,8 @@ public class Horse extends Thread{
                 length -= 100;
             }
         }
-        System.out.println("Con ngua " + nameH + " ve dich voi " + step
-                + " buoc.");
+        System.out.println("Con ngựa " + nameH + " về đích với " + step
+                + " bước ");
     }
 
     public int getLength() {
