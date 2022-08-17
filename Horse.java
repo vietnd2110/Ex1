@@ -1,48 +1,46 @@
 package Ex1;
 
-import java.util.Random;
+public class Horse extends BaseHorse {
+    // thuộc tính của nguwa
+    private String name;
+    private int step;
+    private int length;
 
-import static java.lang.Thread.sleep;
-
-public class Horse extends Thread{
-    private String nameH;
-    private int length = 0;
-    private int step = 0;
-
-    public Horse(String nameH) {
-        this.nameH = nameH;
+    public Horse(String name, int step, int length) {
+        this.name = name;
+        this.step = step;
+        this.length = length;
     }
 
-    public void run() {
-        try {
-	//tạm ngưng một thread cho một khoảng thời gian nhất định
-            sleep(500);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        while (length != 100) {
-            Random randomNumber = new Random();
-            //trả về 1 số bất kì với kiểu int
-            length += randomNumber.nextInt(10) + 1;
-            step += 1;
-            System.out.println(nameH + ": " + length);
-            if (length > 100) {
-                length -= 100;
-            }
-        }
-        System.out.println("Con ngựa " + nameH + " về đích với " + step
-                + " bước ");
+    public Horse() {
     }
 
-    public int getLength() {
-        return this.length;
+    public Horse(String s) {
+        super();
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
     public int getStep() {
         return step;
     }
 
-    public String getNameH() {
-        return nameH;
+    public void setStep(int step) {
+        this.step = step;
+    }
+
+    public int getLength() {
+        return length;
+    }
+
+    public void setLength(int length) {
+        this.length = length;
     }
 }
