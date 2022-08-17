@@ -6,17 +6,39 @@ public class Horse extends BaseHorse {
     private int step;
     private int length;
 
+    public boolean isFinish;
+
     public Horse(String name, int step, int length) {
         this.name = name;
         this.step = step;
         this.length = length;
     }
 
+    @Override
+    public void run() {
+        while (true) {
+            length += getStepLength();
+            step++;
+            System.out.println(name + " length " + length + " step " + step);
+            if (length > 100) length -= 100;
+            if (length == 100) {
+                isFinish = true;
+                break;
+            }
+
+            try {
+                Thread.sleep(10);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
     public Horse() {
     }
 
     public Horse(String s) {
-        super();
+        this.name = s;
     }
 
     public String getName() {
@@ -27,7 +49,7 @@ public class Horse extends BaseHorse {
         this.name = name;
     }
 
-    @Override
+
     public int getStep() {
         return step;
     }
