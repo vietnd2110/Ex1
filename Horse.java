@@ -3,34 +3,44 @@ package Ex1;
 public class Horse extends BaseHorse {
     // thuộc tính của nguwa
     private String name;
-    private int step;
-    private int length;
+    private int step = 0;
+    private int length = 0;
 
-    public boolean isFinish;
+    public boolean isFinish = false;
 
     public Horse(String name, int step, int length) {
         this.name = name;
         this.step = step;
         this.length = length;
+//        this.isFinish = false;
     }
 
     @Override
     public void run() {
-        while (true) {
-            length += getStepLength();
-            step++;
+        while (!isFinish) {
             System.out.println(name + " length " + length + " step " + step);
-            if (length > 100) length -= 100;
-            if (length == 100) {
-                isFinish = true;
-                break;
-            }
+            // viet hàm check về đích hay chưa if (isFinish()) { break;)
+            check();
+            // tách thành sleep method
+            sleep();
+        }
+    }
 
-            try {
-                Thread.sleep(10);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
+    private void check(){
+        if (length > 100) length -= 100;
+        if (length == 100) {
+            isFinish = true;
+            return;
+        }
+        length += getStepLength();
+        step++;
+    }
+
+    private void sleep() {
+        try {
+            Thread.sleep(50);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -39,13 +49,14 @@ public class Horse extends BaseHorse {
 
     public Horse(String s) {
         this.name = s;
+        this.isFinish = false;
     }
 
-    public String getName() {
+    public String getNameHorse() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setNameHorse(String name) {
         this.name = name;
     }
 

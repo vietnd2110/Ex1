@@ -8,13 +8,16 @@ public class Racing {
 
     public void start() {
         horses = HorseFactory.createHorse();
-        for (Horse horse : horses) {
-            (new Thread(horse)).start();
-        }
-
+        startHorses();
         Trongtai trongtai = new Trongtai(horses);
         trongtai.start();
         // tracking xem con ngựa nao vef dich truoc
+    }
+
+    private void startHorses() {
+        for (Horse horse : horses) {
+            horse.start();
+        }
     }
 }
 

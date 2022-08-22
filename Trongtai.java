@@ -1,14 +1,13 @@
 package Ex1;
+
 import static java.lang.Thread.sleep;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class Trongtai extends Thread{
-    private List<Horse> list = new ArrayList<>();
-    private int length = 0;
-    private int step = 0;
+public class Trongtai extends Thread {
+    private List<Horse> list;
 
     public Trongtai(List<Horse> list) {
         this.list = list;
@@ -18,16 +17,20 @@ public class Trongtai extends Thread{
     public void run() {
         while (true) {
             tracking();
-            if (isFinishAll()) break;
+            if (isFinishAll()) {
+                for (Horse horse : list) {
+                    System.out.println("Con ngua " + horse.getNameHorse() + " ve dich voi " + horse.getStep()
+                            + " buoc");
+                }
+                break;
+            }
         }
     }
 
     public void tracking() {
         for (Horse horse : list) {
-            if (horse.isFinish) {
-                System.out.println("Con ngua " + horse.getName() + " ve dich voi " + horse.getStep()
-                        + " buoc.");
-                horse.isFinish = false;
+            if (horse.isFinish && horse.getLength() == 100) {
+                horse.setLength(0);
             }
         }
     }
@@ -36,7 +39,6 @@ public class Trongtai extends Thread{
         for (Horse horse : list) {
             if (!horse.isFinish) return false;
         }
-
         return true;
     }
 }
